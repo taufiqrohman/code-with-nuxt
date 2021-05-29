@@ -2,11 +2,13 @@
   <div class="flex h-screen overflow-hidden bg-gray-100 w-full">
     <sidebar />
     <div class="flex-1 overflow-auto">
-      <div class="w-full flex flex-row justify-between items-center h-16 p-8 pt-12">
+      <div
+        class="w-full flex flex-row justify-between items-center h-16 p-4 lg:p-8 lg:pt-12"
+      >
         <h3 class="text-gray-800 font-bold text-2xl">{{ pageTitle }}</h3>
         <user-info />
       </div>
-      <div class="p-8">
+      <div class="p-4 lg:p-8">
         <Nuxt />
       </div>
     </div>

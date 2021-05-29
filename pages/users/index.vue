@@ -1,12 +1,18 @@
 <template>
-  <div class="w-full py-4 bg-white rounded border border-gray-200">
+  <div
+    class="w-full overflow-x-scroll lg:overflow-visible py-4 bg-white rounded border border-gray-200"
+  >
     <h4 class="text-gray-800 p-4 font-bold text-xl mb-4">All Users</h4>
     <table class="w-full">
       <thead>
         <tr class="border-b-2 border-gray-200 border-collapse">
-          <th class="p-4 w-24 text-center"></th>
-          <th class="p-4 text-left font-bold text-gray-400 w-1/3">Full Name</th>
-          <th class="p-4 text-left font-bold text-gray-400 w-1/3">Email</th>
+          <th class="p-4 w-10 lg:w-24 text-center"></th>
+          <th class="p-4 text-left font-bold text-gray-400 w-auto lg:w-1/3">
+            Full Name
+          </th>
+          <th class="p-4 text-left font-bold text-gray-400 w-auto lg:w-1/3">
+            Email
+          </th>
           <th class="p-4"></th>
         </tr>
       </thead>
@@ -19,7 +25,7 @@
           <td class="p-4">
             <img
               :src="user.avatar"
-              class="w-11 h-11 rounded-full objcet-cover"
+              class="w-6 h-6 lg:w-11 lg:h-11 rounded-full objcet-cover"
               :alt="`${user.first_name} ${user.last_name}`"
             />
           </td>
