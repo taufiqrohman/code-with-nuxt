@@ -2,9 +2,7 @@
   <div class="container">
     <div>
       <Logo />
-      <h1 class="title">
-        code-with-nuxt
-      </h1>
+      <h1 class="title">code-with-nuxt</h1>
       <div class="links">
         <a
           href="https://nuxtjs.org/"
@@ -28,9 +26,47 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from "vue";
+import { User } from "~/types/models";
 
-export default Vue.extend({})
+interface UserListData {
+  currentPage: number;
+  perPage: Number;
+  totalPage: number;
+  total: number;
+  data: Array<User>;
+  error?: String;
+}
+
+export default Vue.extend({
+  data: function (): UserListData {
+    return {
+      currentPage: 0,
+      totalPage: 0,
+      perPage: 0,
+      total: 0,
+      data: [],
+      error: undefined,
+    };
+  },
+  mounted: function () {},
+  methods: {
+    fetchUserList: async function () {
+      const result = await this.$repositories.user.list(this.currentPage + 1);
+      if (result.isError && result.error !== undefined) {
+        this.error = result.error;
+        return;
+      }
+
+      this.data = result.data;
+      this.currentPage = result.page;
+      this.perPage = result.perPage;
+      this.totalPage = result.totalPage;
+      this.total = result.total;
+      this.error = undefined;
+    },
+  },
+});
 </script>
 
 <style>
@@ -49,16 +85,8 @@ export default Vue.extend({})
 }
 
 .title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
+  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   display: block;
   font-weight: 300;
   font-size: 100px;
