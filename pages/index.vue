@@ -1,80 +1,52 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">
-        code-with-nuxt
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+  <div class="flex flex-row-reverse">
+    <div class="w-1/2">
+      <img
+        src="~/assets/images/about.png"
+        class="w-full max-h-80 rounded object-cover"
+        alt=""
+      />
+    </div>
+
+    <div class="w-1/2 text-gray-800 mr-8">
+      <h3 class="font-bold text-2xl mb-4">Lorem ipsum dolor amet</h3>
+      <p>
+        consectetur adipiscing elit. Curabitur quam magna, tristique at sapien
+        sed, feugiat finibus felis. Curabitur vitae mi nec massa facilisis
+        convallis eget sit amet mauris. Nam vel augue est. Curabitur a tortor id
+        sapien rutrum suscipit eu eu diam. Etiam vestibulum orci neque, in
+        maximus lectus rutrum sit amet. In quis erat facilisis, rhoncus erat
+        vitae, interdum massa. Sed sollicitudin diam imperdiet metus pulvinar,
+        eget venenatis lacus vulputate.
+      </p>
+
+      <p>
+        Maecenas vel posuere lacus. Integer eget purus feugiat ligula molestie
+        varius eu sed ligula. Sed congue enim neque, eget malesuada massa
+        molestie vel. Nam ullamcorper turpis cursus neque condimentum ultrices.
+        Duis consequat leo auctor urna vehicula, a blandit quam consectetur.
+        Quisque mattis scelerisque lorem sed varius. Aenean eget eros orci. Duis
+        nec convallis nisl.
+      </p>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({})
+import Vue from "vue";
+export default Vue.extend({
+  head: function () {
+    return {
+      title: "About",
+    };
+  },
+  meta: {
+    pageTitle: "About",
+  },
+  data: function () {
+    return {
+      title: "About",
+    };
+  },
+});
 </script>
-
-<style>
-/* Sample `apply` at-rules with Tailwind CSS
-.container {
-@apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>
