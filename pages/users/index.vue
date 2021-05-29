@@ -70,6 +70,14 @@ interface UserListData {
 
 export default Vue.extend({
   components: { Pagination, PrimaryButton },
+  head: function () {
+    return {
+      title: "Users",
+    };
+  },
+  meta: {
+    pageTitle: "Users",
+  },
   data: function (): UserListData {
     return {
       currentPage: 0,

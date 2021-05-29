@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <div class="w-2/5 bg-white rounded border-gray-200 p-8">
+    <div class="w-1/2 bg-white rounded border-gray-200 p-8">
       <div v-if="state === 'loading' && user === undefined" class="h-8">
         Loading ...
       </div>
@@ -77,10 +77,18 @@ export default Vue.extend({
   mounted: function () {
     this.fetchUser();
   },
+  meta: {
+    pageTitle: "User Detail",
+  },
   computed: {
     id: function () {
       return Number(this.$route.params.id);
     },
+  },
+  head: function() {
+      return {
+          title: 'User Detail'
+      };
   },
   methods: {
     fetchUser: async function () {
