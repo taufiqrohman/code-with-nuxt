@@ -1,5 +1,10 @@
 module.exports = {
-  purge: [],
+  purge: {
+    content: ["./**/*.vue"],
+    options: {
+      safelist: ["bg-default-gray", "bg-primary", "p-*"]
+    }
+  },
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
