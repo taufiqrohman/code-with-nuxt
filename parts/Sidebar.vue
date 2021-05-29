@@ -1,5 +1,5 @@
 <template>
-  <aside class="hidden lg:flex lg:flex-shrink-0 bg-gray-800">
+  <aside class="hidden lg:flex lg:flex-shrink-0 bg-default-gray">
     <div class="flex flex-col w-64">
       <div class="flex items-center flex-row flex-shrink-0 p-8 mb-8">
         <img src="~/assets/images/logo.png" alt="AOne Logo" class="mr-4" />
