@@ -1,27 +1,37 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">code-with-nuxt</h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
+  <div class="w-full p-8">
+    <table class="w-full">
+      <thead>
+        <tr class="border-b-2 border-gray-200 border-collapse">
+          <th class="p-4 w-24 text-center"></th>
+          <th class="p-4 text-left font-weight-bold text-gray-400 w-1/3">
+            Full Name
+          </th>
+          <th class="p-4 text-left font-weight-bold text-gray-400 w-1/3">Email</th>
+          <th class="p-4"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="user in data" :key="`user-${user.id}`" class="border-b border-gray-200">
+          <td class="p-4">
+            <img
+              :src="user.avatar"
+              class="w-11 h-11 rounded-full objcet-cover"
+              :alt="`${user.first_name} ${user.last_name}`"
+            />
+          </td>
+          <td class="p-4">
+            {{ `${user.first_name} ${user.last_name}` }}
+          </td>
+          <td class="p-4">{{ user.email }}</td>
+          <td class="p-4 text-right">
+            <a href="#" class="bg-blue-400 rounded-full p-4 text-xs uppercase text-white">
+              View Detail
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
@@ -49,7 +59,9 @@ export default Vue.extend({
       error: undefined,
     };
   },
-  mounted: function () {},
+  mounted: function () {
+    this.fetchUserList();
+  },
   methods: {
     fetchUserList: async function () {
       const result = await this.$repositories.user.list(this.currentPage + 1);
