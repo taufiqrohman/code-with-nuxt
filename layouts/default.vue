@@ -1,20 +1,17 @@
 <template>
-  <div class="bg-gray-100 w-full p-4">
-    <Nuxt />
+  <div class="bg-gray-100 w-full p-8">
+    <div>sidebar</div>
+    <div>
+      Header
+      <Nuxt />
+    </div>
   </div>
 </template>
 
 <style>
 html {
-  font-family:
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
+  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
