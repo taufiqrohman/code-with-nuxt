@@ -1,4 +1,4 @@
-import { AxiosOptions, NuxtAxiosInstance } from "@nuxtjs/axios";
+import { NuxtAxiosInstance } from "@nuxtjs/axios";
 import { ListApiResponse, SingleApiResponse } from "~/types";
 import { User } from "~/types/models";
 

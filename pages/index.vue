@@ -1,18 +1,21 @@
 <template>
-  <div class="w-full p-8">
+  <div class="w-full py-4 bg-white rounded border border-gray-200">
+    <h4 class="text-gray-800 p-4 font-bold text-lg mb-4">All Users</h4>
     <table class="w-full">
       <thead>
         <tr class="border-b-2 border-gray-200 border-collapse">
           <th class="p-4 w-24 text-center"></th>
-          <th class="p-4 text-left font-weight-bold text-gray-400 w-1/3">
-            Full Name
-          </th>
-          <th class="p-4 text-left font-weight-bold text-gray-400 w-1/3">Email</th>
+          <th class="p-4 text-left font-bold text-gray-400 w-1/3">Full Name</th>
+          <th class="p-4 text-left font-bold text-gray-400 w-1/3">Email</th>
           <th class="p-4"></th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in data" :key="`user-${user.id}`" class="border-b border-gray-200">
+        <tr
+          v-for="user in data"
+          :key="`user-${user.id}`"
+          class="border-b border-gray-200"
+        >
           <td class="p-4">
             <img
               :src="user.avatar"
@@ -25,12 +28,29 @@
           </td>
           <td class="p-4">{{ user.email }}</td>
           <td class="p-4 text-right">
-            <a href="#" class="bg-blue-400 rounded-full p-4 text-xs uppercase text-white">
+            <a
+              href="#"
+              class="bg-blue-400 rounded-full p-4 text-xs uppercase text-white"
+            >
               View Detail
             </a>
           </td>
         </tr>
       </tbody>
+
+      <tfoot>
+        <tr>
+          <td colspan="2">&nbsp;</td>
+          <td colspan="2" class="px-4 py-8">
+            <pagination
+              :current="currentPage"
+              :perPage="perPage"
+              :total="total"
+              :totalPage="totalPage"
+            />
+          </td>
+        </tr>
+      </tfoot>
     </table>
   </div>
 </template>
@@ -38,6 +58,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { User } from "~/types/models";
+import Pagination from "~/components/Pagination.vue";
 
 interface UserListData {
   currentPage: number;
@@ -49,6 +70,7 @@ interface UserListData {
 }
 
 export default Vue.extend({
+  components: { Pagination },
   data: function (): UserListData {
     return {
       currentPage: 0,
@@ -60,13 +82,31 @@ export default Vue.extend({
     };
   },
   mounted: function () {
-    this.fetchUserList();
+    this.fetchUserList(this.requestedPage || 1);
+  },
+  computed: {
+    requestedPage: function () {
+      if (this.$route.query == null) return 1;
+      if (
+        this.$route.query.page === undefined ||
+        this.$route.query.page === null
+      ) {
+        return 1;
+      }
+
+      return Number(this.$route.query.page) || 1;
+    },
   },
   methods: {
-    fetchUserList: async function () {
-      const result = await this.$repositories.user.list(this.currentPage + 1);
+    fetchUserList: async function (page: number = 1) {
+      const result = await this.$repositories.user.list(page);
       if (result.isError && result.error !== undefined) {
         this.error = result.error;
+        return;
+      }
+
+      if (this.requestedPage > result.totalPage) {
+        this.$router.push(this.$route.path + "?page=" + result.totalPage);
         return;
       }
 
@@ -76,6 +116,13 @@ export default Vue.extend({
       this.totalPage = result.totalPage;
       this.total = result.total;
       this.error = undefined;
+    },
+  },
+  watch: {
+    requestedPage: function (current, prev) {
+      if (current !== prev) {
+        this.fetchUserList(current);
+      }
     },
   },
 });
